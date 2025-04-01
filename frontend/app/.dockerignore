@@ -1,0 +1,16 @@
+app/node_modules
+app/.vscode
+app/public
+
+.git/
+.gitignore
+
+README.md
+*.md
+*.txt
+
+docker-compose.yml
+dockerfile         
+.dockerignore   
+
+npm-debug.log*
