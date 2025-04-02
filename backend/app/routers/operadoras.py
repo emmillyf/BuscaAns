@@ -21,3 +21,20 @@ async def operadora_by_id(id:int, db: Session = Depends(get_db)):
     if not operadora_queryset:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
     return operadora_queryset
+
+@router.get("/operadoras/buscar/", response_model=List[OperadorasBase])
+async def operadoras_by_filter(
+    termo: str, 
+    pagina: int = 1, 
+    por_pagina: int = 10, 
+    db: Session = Depends(get_db)
+):
+    operadoras = service.get_by_filter(db, termo, pagina, por_pagina)
+    
+    if not operadoras:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Nenhuma operadora encontrada para o termo pesquisado."
+        )
+    
+    return operadoras

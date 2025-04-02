@@ -3,6 +3,7 @@ class OperadorasBase(BaseModel):
     registro_ans: int
     nome_fantasia: str
     cnpj: str
+    uf: str
     modalidade: str
     
     class Config:
@@ -14,9 +15,9 @@ class OperadorasInformacoes(OperadorasBase):
     cnpj: str
     modalidade: str
     cidade: str
-    uf: int
-    cep: int
-    ddd: int
+    uf: str
+    cep: str
+    ddd: str
     telefone: str
     endereco_eletronico: str
     representante: str
