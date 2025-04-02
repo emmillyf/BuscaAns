@@ -21,6 +21,3 @@ def get_by_filter(db: Session, termo: str, pagina: int = 1, por_pagina: int = 30
         operadoras_ans.modalidade.ilike(f"%{termo}%")
 
     ).offset((pagina - 1) * por_pagina).limit(por_pagina)
-
-    print("SQL Executado:", str(query.statement.compile(compile_kwargs={"literal_binds": True})))
-    return query.all()
