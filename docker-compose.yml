@@ -1,21 +1,44 @@
-# version: '3.8'
-# services:
+version: '3.8'
+services:
+  db:
+    image: postgres:15
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: POSTGRES_USER
+      POSTGRES_PASSWORD: POSTGRES_PASSWORD
+      POSTGRES_DB: operadoras_ans
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
 
-#   backend:
-#     build:
-#         ./backend 
-#     ports:
-#       - 8080:8080
-#     volumes:
-#         - ./backend:app
+  backend:
+    container_name: api_app
+    build:
+      context: ./backend
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - db
+    env_file:
+      - .env  
 
-#   frontend:
-#     build:
-#         ./frontend
-#     ports:
-#       - 5173:5173
-#     depends_on:
-#         - backend
+  frontend:
+    container_name: frontend_app
+    build:
+      context: ./frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+    command: npm run dev
+    working_dir: /app
 
-  
-    
+
+volumes:
+  pgdata:
