@@ -1,42 +1,63 @@
 <template>
-<div id="app">
-    <HomePage />
-
-</div>
-
+  <div id="app">
+    <AppSidebar :onSidebarStateChange="updateSidebarState" />
+    <div :class="['main-content', { collapsed: isCollapsed }]">
+      <router-view />
+    </div>
+  </div>
 </template>
 
 <script>
-
-import HomePage from './views/HomeView.vue'
+import AppSidebar from './components/Sidebar.vue'
 
 export default {
-  name: 'App',
-    components: {
-      HomePage
-  }, 
-}
+  components: { AppSidebar },
+  data() {
+    return {
+      isCollapsed: false,
+    }
+  },
+  methods: {
+    updateSidebarState(collapsed) {
+      this.isCollapsed = collapsed;
+    }
+  }
+};
 </script>
 
 <style>
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing:border-box;
-
+body.light {
+  background-color: #ffffff;
+  color: #000000;
 }
 
-/* .app{
+body.dark {
+  background-color: #1e1e1e;
+  color: #000000;
+}
+
+.sidebar {
+  transition: background-color 0.3s;
+}
+body.light .sidebar {
+  background-color: #f0f0f0;
+}
+body.dark .sidebar {
+  background-color: #2e2e2e;
+}
+
+#app  {
+  display: flex;
+}
+
+#main-content {
+  margin-left: 250px;
+  padding: 20px;
   width: 100%;
-  min-height: 100%;
-  background: #f3f3f3;
-  color: #152828;
-} */
+  transition: margin-left 0.3s ease;
+}
 
-/* .dark{
-  background: #152828;
-  color: #F3F3F3;
-} */
-
+#sidebar-container.collapsed + #main-content {
+  margin-left: 60px;
+}
 </style>

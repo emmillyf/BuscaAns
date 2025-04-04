@@ -1,2 +1,16 @@
-.venv
+# Python (backend)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
 .env
+venv/
+.envrc
+.idea/
+.vscode/
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+.DS_Store
+

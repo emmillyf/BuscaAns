@@ -1,23 +1,25 @@
-.DS_Store
-node_modules
+# dependencies
+/node_modules
+
+# build output
 /dist
+/.vitepress/dist
+/.output
+/build
 
+# temp files
+*.log
+*.tmp
+*.swp
 
-# local env files
+# local env
 .env.local
 .env.*.local
 
-# Log files
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
+# editor/OS
+.DS
 
-# Editor directories and files
-.idea
-.vscode
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+# Docker
+docker-compose.override.yml
+.dockerignore
+.DS_Store

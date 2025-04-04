@@ -8,7 +8,7 @@ def get_all(db: Session):
 def get_by_id(db: Session, operadora_id: int):
     return db.query(operadoras_ans).filter(operadoras_ans.registro_ans==operadora_id).first()
 
-def get_by_filter(db: Session, termo: str, pagina: int = 1, por_pagina: int = 30):
+def get_by_filter(db: Session, termo: str, pagina: int = 1, por_pagina: int = 20):
     termo = termo.strip()  # Remove espaços em branco
     if not termo:
         return db.query(operadoras_ans).offset((pagina - 1) * por_pagina).limit(por_pagina).all()

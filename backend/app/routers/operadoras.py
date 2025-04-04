@@ -1,8 +1,9 @@
-from fastapi import status, HTTPException, Depends, APIRouter
+from fastapi import status, HTTPException, Depends, APIRouter, Response
 from sqlalchemy.orm import Session
-from typing import List
+from typing import List, Optional
 from data.conexao import get_db 
 from schemas.schema import OperadorasBase
+import requests
 import services.service as service
 
 router = APIRouter(
@@ -24,9 +25,9 @@ async def operadora_by_id(id:int, db: Session = Depends(get_db)):
 
 @router.get("/operadoras/buscar/", response_model=List[OperadorasBase])
 async def operadoras_by_filter(
-    termo: str, 
+    termo: Optional[str] = "", 
     pagina: int = 1, 
-    por_pagina: int = 10, 
+    por_pagina: int = 20, 
     db: Session = Depends(get_db)
 ):
     operadoras = service.get_by_filter(db, termo, pagina, por_pagina)
@@ -38,3 +39,9 @@ async def operadoras_by_filter(
         )
     
     return operadoras
+
+@router.get("/download-csv")
+def download_csv():
+    url = "https://dadosabertos.ans.gov.br/FTP/PDA/operadoras_de_plano_de_saude_ativas/Relatorio_cadop.csv"
+    r = requests.get(url)
+    return Response(content=r.content, media_type="text/csv", headers={"Content-Disposition": "attachment; filename=operadoras_ativas.csv"})
