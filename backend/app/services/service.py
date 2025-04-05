@@ -1,4 +1,4 @@
-from app.models.model import operadoras_ans
+from models.model import operadoras_ans
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 
