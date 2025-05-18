@@ -50,8 +50,8 @@ venv\Scripts\activate</code></pre>
 <p>Crie um arquivo <code>.env</code> na raiz do projeto com a seguinte configuração de variáveis de ambiente:</p>
 <pre><code># Preencha com suas informações
 
-DB_USER=postgres
-DB_PASSWORD=2203
+DB_USER=seu_user
+DB_PASSWORD=sua_senha
 DB_HOST=localhost
 DB_PORT=5432
 DB_NAME=despesas_op</code></pre>
